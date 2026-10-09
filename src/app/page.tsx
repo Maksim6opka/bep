@@ -10,6 +10,12 @@ export default function Home() {
         <p className="text-lg font-normal leading-7 tracking-tight text-black dark:text-zinc-50">maksym</p>
       </div>
       <a
+        href="/tools"
+        className="absolute right-6 top-6 z-20 text-sm tracking-tight text-black/70 transition-opacity hover:opacity-80 dark:text-zinc-50/70"
+      >
+        tools
+      </a>
+      <a
         href="https://github.com/maksim6opka"
         target="_blank"
         rel="noopener noreferrer"
