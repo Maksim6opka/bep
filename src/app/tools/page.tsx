@@ -8,6 +8,11 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    href: "/tools/markdown-pdf",
+    title: "Markdown → PDF",
+    description: "Preview and convert Markdown locally, with code, tables, math, and diagrams.",
+  },
+  {
     href: "/tools/gif",
     title: "GIF converter",
     description: "Convert PNG, JPEG, or MP4 to GIF.",
