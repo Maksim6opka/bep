@@ -22,7 +22,7 @@ export function PdfPreview({ url }: { url: string }) {
         const pdf = await loading.promise;
         if (!cancelled) setDocument(pdf);
       } catch {
-        if (!cancelled) { setError("Не вдалося відкрити передогляд. Ви можете завантажити PDF."); setBusy(false); }
+        if (!cancelled) { setError("Could not open the preview. You can still download the PDF."); setBusy(false); }
       }
     })();
     return () => { cancelled = true; void loading?.destroy(); };
@@ -44,7 +44,7 @@ export function PdfPreview({ url }: { url: string }) {
         task = current.render({ canvas: target, viewport });
         await task.promise;
       } catch (e) {
-        if (!cancelled && !(e instanceof Error && e.name === "RenderingCancelledException")) setError("Не вдалося відобразити сторінку PDF.");
+        if (!cancelled && !(e instanceof Error && e.name === "RenderingCancelledException")) setError("Could not render this PDF page.");
       } finally { if (!cancelled) setBusy(false); }
     })();
     return () => { cancelled = true; task?.cancel(); };
@@ -53,13 +53,13 @@ export function PdfPreview({ url }: { url: string }) {
   function changePage(next: number) { setBusy(true); setPage(next); }
   return <div className="bg-zinc-200 p-4 text-zinc-900">
     <div className="mb-4 flex items-center justify-center gap-4 text-sm">
-      <button className="rounded border border-zinc-400 px-3 py-1 disabled:opacity-40" disabled={!document || page <= 1 || busy} onClick={() => changePage(page - 1)}>Назад</button>
-      <span aria-live="polite">{document ? `Сторінка ${page} із ${document.numPages}` : "Відкриття PDF…"}</span>
-      <button className="rounded border border-zinc-400 px-3 py-1 disabled:opacity-40" disabled={!document || page >= document.numPages || busy} onClick={() => changePage(page + 1)}>Далі</button>
+      <button className="rounded border border-zinc-400 px-3 py-1 disabled:opacity-40" disabled={!document || page <= 1 || busy} onClick={() => changePage(page - 1)}>Previous</button>
+      <span aria-live="polite">{document ? `Page ${page} of ${document.numPages}` : "Opening PDF…"}</span>
+      <button className="rounded border border-zinc-400 px-3 py-1 disabled:opacity-40" disabled={!document || page >= document.numPages || busy} onClick={() => changePage(page + 1)}>Next</button>
     </div>
     {error && <p role="alert" className="mb-3 text-sm text-red-800">{error}</p>}
     <div aria-busy={busy}>
-      <canvas ref={canvas} aria-label={`Передогляд PDF, сторінка ${page}`} className="mx-auto h-auto max-w-full bg-white shadow-sm" />
+      <canvas ref={canvas} aria-label={`PDF preview, page ${page}`} className="mx-auto h-auto max-w-full bg-white shadow-sm" />
     </div>
   </div>;
 }

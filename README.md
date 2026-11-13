@@ -8,6 +8,6 @@ All document processing happens in the browser. No upload API, CDN scripts, remo
 
 Supports headings, emphasis, nested lists, task lists, blockquotes, tables, links, footnotes, syntax-highlighted code, KaTeX math with dollar/bracket delimiters, and Mermaid diagrams. Raw HTML and diagrams containing external resources/configuration are shown as text. ChatGPT-specific interactive widgets are not part of Markdown.
 
-PDF pages preserve the rendered appearance as raster images, so text is not selectable. Markdown imports are limited to 2 MB and local images to 10 MB each. Very long documents are rejected before canvas rendering to avoid blank exports; split them into smaller documents.
+PDF pages preserve the rendered appearance as raster images, so text is not selectable. There are no application-imposed file size or document length limits. PDF pages are rendered individually to avoid creating a document-sized canvas. Available browser memory and device resources determine practical capacity.
 
 Development: `npm run dev`. If Turbopack fails to start its worker on Windows, use `node node_modules/next/dist/bin/next dev --webpack`. The corresponding build command is `node node_modules/next/dist/bin/next build --webpack`.

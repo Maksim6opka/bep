@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function MarkdownPdfPage() {
   return <div>
     <h1 className="text-2xl font-medium tracking-tight">Markdown → PDF</h1>
-    <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Файли залишаються на вашому пристрої. Редагування, передогляд і створення PDF — у браузері.</p>
+    <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Your files stay on your device. Editing, previews, and PDF generation run entirely in your browser.</p>
     <MarkdownConverter />
   </div>;
 }

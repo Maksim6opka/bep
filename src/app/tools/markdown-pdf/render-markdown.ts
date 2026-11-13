@@ -38,8 +38,8 @@ export async function renderMarkdown(source: string, images: Record<string, stri
     const safeData = /^data:image\/(png|jpeg|gif|webp);base64,[a-z0-9+/=\s]+$/i.test(src);
     const alt = md.utils.escapeHtml(token.content || src);
     if (!local && !safeData) {
-      warnings.add("Зовнішні або відсутні зображення замінено підписами. Додайте зображення з пристрою з відповідними іменами файлів.");
-      return `<span class="md-missing-image">[Зображення: ${alt}]</span>`;
+      warnings.add("Remote or missing images have been replaced with captions. Attach local images with matching filenames.");
+      return `<span class="md-missing-image">[Image: ${alt}]</span>`;
     }
     return `<img src="${local || src}" alt="${alt}">`;
   };
@@ -70,12 +70,12 @@ export async function renderMarkdown(source: string, images: Record<string, stri
           root.setAttribute("height", String(bounds[3]));
         }
         const img = document.createElement("img");
-        img.alt = "Діаграма Mermaid";
+        img.alt = "Mermaid diagram";
         img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(new XMLSerializer().serializeToString(root))}`;
         target.append(img);
       } catch {
         target.textContent = diagram.source;
-        warnings.add("Діаграму Mermaid з помилкою, HTML, зовнішніми ресурсами або власною конфігурацією показано як код.");
+        warnings.add("A Mermaid diagram with invalid syntax, HTML, external resources, or custom configuration is shown as code.");
       }
     }
   }
