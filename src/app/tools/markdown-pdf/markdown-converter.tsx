@@ -141,6 +141,6 @@ export function MarkdownConverter() {
         {pdf ? <><div className="flex flex-wrap gap-3 p-3"><a className={button} href={pdf} download={name.replace(/\.[^.]+$/, "") + ".pdf"}>Download PDF</a><a className={button} href={pdf} target="_blank" rel="noopener noreferrer">Open PDF</a></div><PdfPreview key={pdf} url={pdf} /></> : <p className="p-10 text-center text-sm text-zinc-500">Click “Create PDF” to preview the output file. After editing, generate the PDF again.</p>}
       </div>
     </div>
-    <p className="text-xs leading-relaxed text-zinc-500">Headings, lists, blockquotes, tables, task lists, links, footnotes, syntax highlighting, LaTeX, and Mermaid. HTML is displayed as text. ChatGPT interactive cards and internal references are not part of Markdown. PDF pages preserve formatting as images; text is not selectable.</p>
+    <p className="text-xs leading-relaxed text-zinc-500">Headings, lists, blockquotes, tables, task lists, links, footnotes, syntax highlighting, LaTeX, and Mermaid. HTML is displayed as text. ChatGPT interactive cards and internal references are not part of Markdown. PDF text can be selected, copied, and searched.</p>
   </section>;
 }

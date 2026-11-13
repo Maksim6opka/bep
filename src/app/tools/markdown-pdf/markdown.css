@@ -35,3 +35,10 @@
 .markdown-document .katex { font-size: 1.1em; }
 .markdown-document .footnotes { font-size: .85em; color: #52525b; }
 .md-export-host { position: absolute; left: 0; top: 0; z-index: -100; background: #fff; pointer-events: none; }
+
+/* PDF.js text spans follow the same viewport as the page canvas. */
+.pdf-text-layer { position: absolute; inset: 0; overflow: hidden; line-height: 1; text-align: initial; letter-spacing: normal; word-spacing: normal; text-size-adjust: none; forced-color-adjust: none; transform-origin: 0 0; z-index: 1; --min-font-size: 1; --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size)); --min-font-size-inv: calc(1 / var(--min-font-size)); --scale-round-x: 1px; --scale-round-y: 1px; }
+.pdf-text-layer :is(span, br) { color: transparent; position: absolute; white-space: pre; cursor: text; transform-origin: 0 0; user-select: text; }
+.pdf-text-layer > :not(.markedContent), .pdf-text-layer .markedContent span:not(.markedContent) { --font-height: 0; font-size: calc(var(--text-scale-factor) * var(--font-height)); --scale-x: 1; --rotate: 0deg; transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv)); }
+.pdf-text-layer .markedContent { display: contents; }
+.pdf-text-layer ::selection { background: #3b82f680; color: transparent; }

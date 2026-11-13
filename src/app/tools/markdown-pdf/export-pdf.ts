@@ -1,4 +1,5 @@
 import { measurePagination } from "./pagination";
+import { addDocumentText, embedTextFont } from "./pdf-text";
 
 // Paginate before rasterizing: each canvas is only one paper page tall.
 export async function exportPdf(element: HTMLElement, format: "a4" | "letter", onProgress: (page: number, total: number) => void) {
@@ -30,6 +31,7 @@ export async function exportPdf(element: HTMLElement, format: "a4" | "letter", o
     const pages = measurePagination(container, pageHeight);
     const total = pages.length;
     const pdf = new jsPDF(options.jsPDF);
+    await embedTextFont(pdf);
     for (let page = 0; page < total; page++) {
       onProgress(page + 1, total);
       // Yield between pages so status updates remain visible on large exports.
@@ -51,6 +53,7 @@ export async function exportPdf(element: HTMLElement, format: "a4" | "letter", o
     // Keep links usable even though the page content is rasterized.
     const scaleX = size.inner.width / bounds.width;
     const scaleY = size.inner.height / pageHeight;
+    addDocumentText(pdf, container, pages, scaleX, scaleY);
     const pageAt = (top: number) => pages.findIndex(page => top >= page.top && top < page.bottom);
     for (const link of container.querySelectorAll("a[href]")) {
       const href = link.getAttribute("href")!;
