@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "preview": "next build && wrangler dev",
-    "deploy": "next build && wrangler deploy",
+    "build": "next build --webpack",
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
     "start": "next start",
     "lint": "eslint"
   },

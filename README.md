@@ -10,4 +10,6 @@ Supports headings, emphasis, nested lists, task lists, blockquotes, tables, link
 
 PDF pages preserve the rendered appearance and include a selectable, searchable Unicode text layer from the source document. The built-in preview also supports text selection and copying. Noto Sans is bundled locally under the SIL Open Font License (see public/fonts/OFL.txt). There are no application-imposed file size or document length limits. PDF pages are rendered individually to avoid creating a document-sized canvas. Available browser memory and device resources determine practical capacity.
 
-Development: `npm run dev`. If Turbopack fails to start its worker on Windows, use `node node_modules/next/dist/bin/next dev --webpack`. The corresponding build command is `node node_modules/next/dist/bin/next build --webpack`.
+Development: `npm run dev`. If Turbopack fails to start its worker on Windows, use `node node_modules/next/dist/bin/next dev --webpack`. Production builds use Webpack via `npm run build`; preview and deploy scripts reuse that command.
+
+For Cloudflare Workers Builds, set the build command to `npm run build` and the deploy command to `npx wrangler deploy`. Wrangler serves the generated `out` directory. Using `npm run deploy` as the deploy command also works, but repeats the build if a separate build command is configured.
